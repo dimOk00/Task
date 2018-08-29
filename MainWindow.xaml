@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:VM="clr-namespace:TreeViewMVVMBinding"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="330" MinWidth="330" MinHeight="200"
+        Title="MainWindow" Height="272.5" Width="330" MinWidth="330" MinHeight="200"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        KeyDown="Grid_KeyDown">
+        KeyDown="Grid_KeyDown"
+        Name="TestTaskWindow">
     <Window.DataContext>
         <VM:MainWindowViewModel/>
     </Window.DataContext>
@@ -37,7 +38,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid HorizontalAlignment="Right" Width="322">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -46,6 +47,7 @@
 
         <Grid Grid.Row="0" Grid.Column="0" MinWidth="300" MinHeight="70">
             <Grid.RowDefinitions>
+                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -58,6 +60,8 @@
             <Button x:Name="RemoveGroup_ControlButton" Command="{Binding RemoveGroupControl}" CommandParameter="{Binding ElementName=MainTreeView, Path=SelectedItem}" Grid.Column="1" Grid.Row="0" Content="Remove Group/Control" MinHeight="20" MinWidth="145" AutomationProperties.Name="RemoveGroup_ControlButton" AutomationProperties.ItemType="Button" />
             <Button x:Name="AddControlButton" Command="{Binding AddControlCommand}" CommandParameter="{Binding ElementName=MainTreeView, Path=SelectedItem}" Grid.Column="0" Grid.Row="1" Content="Add control" MinHeight="20" MinWidth="100" Click="AddControlButton_Click" AutomationProperties.Name="AddControlButton" AutomationProperties.ItemType="Button"/>
             <Button x:Name="HighlightButton" Click="HighlightButton_Click" Command="{Binding Highlight}" CommandParameter="{Binding ElementName=MainTreeView, Path=Items}" Grid.Column="1" Grid.Row="1" Content="Highlight" MinHeight="20" MinWidth="145" AutomationProperties.Name="HighlightButton" AutomationProperties.ItemType="Button"/>
+            <TextBox x:Name="xTextBox" Grid.Row="3" Grid.Column="0" TextChanged="xTextBox_TextChanged"/>
+            <TextBox x:Name="yTextBox" Grid.Row="3" Grid.Column="1" TextChanged="yTextBox_TextChanged"/>
         </Grid>
 
         <TreeView x:Name="MainTreeView" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Groups}" AutomationProperties.Name="MainTreeView" AutomationProperties.ItemType="treeView">
@@ -69,7 +73,7 @@
                     </StackPanel>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <HierarchicalDataTemplate DataType="{x:Type VM:MyControl}">
-                            <StackPanel Orientation="Horizontal" Height="50" AutomationProperties.Name="TreeViewItemControl" AutomationProperties.ItemType="TreeViewItem">
+                            <StackPanel Orientation="Horizontal" Height="50" AutomationProperties.Name="TreeViewItemControl" AutomationProperties.ItemType="TreeViewItem" Name="myControls">
                                 <Image Margin="5" HorizontalAlignment="Left" Height="40" Width="40" Source="Resources/icon-file.png"></Image>
                                 <TextBlock Height="40" Text="{Binding Name}" AutomationProperties.Name="{Binding Name}" Margin="5"/>
                                 <TextBlock Height="40" Text="{Binding Role}" AutomationProperties.Name="{Binding Role}" Margin="5"/>
